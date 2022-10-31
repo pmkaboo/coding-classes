@@ -1,0 +1,78 @@
+#^ 19. Procs
+
+# earlier we talked about how everything in ruby is an object.
+# well, as with every rule, this one also has some exceptions,
+# for example blocks that we went over in the last lesson, are
+# not objects. they cant be saved into variables, or reused in
+# any other way, and they also lack other abilities of objects,
+# like for example you cant call any methods on a block.
+
+# but sometimes it would be very helpful to be able to reuse
+# a block, and this is where `procs` come into play. you can
+# think of procs like saved, or named, blocks.
+
+odd_number = proc { |x| x.odd? } # x % 2 == 1
+[1,2,3,4,5].select(&odd_number)
+
+def my_method(x, &block)
+  puts yield(x)
+end
+
+my_method(2, &odd_number) # what will this return?
+
+#~ exercise:
+# -> create a proc that takes one number argument
+#    and returns it squared
+# -> create an array with any numbers
+# -> print out the result of calling the method
+#    `map` with your proc on the array
+
+#* call
+
+# unlike blocks, its also possible to directly
+# `call` procs
+
+cube = proc { |x| x**3 }
+cube.call(4)
+
+#~ exercise:
+# -> try directly calling the proc youve created before
+
+#* symbols and proc
+
+# its also possible to turn regular methods into proc
+
+['1', '2', '3', '4'].map(&:to_i)
+
+# in this case we first change the method name into a symbol
+# `to_i` -> `:to_i`, and then we use the ampersand `&` to
+# turn the symbol into a proc. this will call the method
+# on each of the elements in the array, and if some of the
+# elements dont know the method we will get an error.
+
+[1,2,3].each(&:random_method_name)
+
+#~ exercise:
+# -> create a proc that will take one string argument,
+#    if the string has fewer than 7 characters,
+#      it will the return the string capitalized
+#    if the string has more than 7 characters,
+#      it will return the first 7 characters capitalized,
+#      followed by 3 dots
+#    for example:
+#      `proc.call('very long string')` returns 'Very lo...'
+#      `proc.call('short')` returns 'Short'
+#
+# -> ask the user to provide a set of people names
+#      and store them into an array
+# -> ask the user to provide a set of city names
+#      and store them into a different array
+# -> sanitize/clean up both these arrays with your proc
+#      and print out the results
+# -> for example:
+#      input:
+#        ['jim', 'veronika']
+#        ['kosice', 'bardejov']
+#      output:
+#        ['Jim', 'Veronik...]
+#        ['Kosice', 'Bardejo...']
