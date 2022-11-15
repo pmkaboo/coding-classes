@@ -28,7 +28,7 @@ end
 # some methods can take regular and block arguments
 # at the same time
 
-[1, 2, 3].each_slice(2) { |x| puts x.to_s }
+['a', 'b', 'c', 'd', 'e'].each_slice(3) { |x| puts x.to_s }
 
 # while `each` takes items one by one and passes them
 # into the block, `each_slice(n)` will take `n` number

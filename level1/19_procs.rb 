@@ -76,3 +76,6 @@ cube.call(4)
 #      output:
 #        ['Jim', 'Veronik...]
 #        ['Kosice', 'Bardejo...']
+
+# '123456'.slice(1, 3) # returns '234'
+# '123456'[0..2] # returns '12
