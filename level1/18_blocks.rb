@@ -111,4 +111,3 @@ end
 #    a block that will print out the number squared
 # -> call your method with a number and
 #    a block that will return the number cubed (raised to the third power)
-
