@@ -58,6 +58,6 @@ x = gets.chomp.to_i
 
 # and now we can do maths with `x`
 
-#~ exercise2:
+#~ exercise:
 # -> ask the user for a number
 # -> output the number multiplied by 2
