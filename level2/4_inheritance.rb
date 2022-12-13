@@ -61,6 +61,8 @@ woodpecker.build_nest # will print both the line in bird and the line in woodpec
 #      two required attributes @filename and @type
 #      method `generate` which will just print 'generating {type} export file #{filename}'
 # -> create PdfExport class that will inherit from DataExport
-#      override the initialize method of this class to set @type = :pdf
+#      override the initialize method of this class to
+#        take just one argument - filename
+#        and to set the type to 'pdf' (without using `@type=` in this class)
 # -> create instance of PdfExport class
 #      and call its `generate` method
