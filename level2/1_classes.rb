@@ -1,4 +1,4 @@
-#^ Classes
+#^ 1. Classes
 
 # Ruby is object oriented-programming language, which means
 # that its workign with programming constructs called objects.

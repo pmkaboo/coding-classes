@@ -1,4 +1,4 @@
-#^ Inheritance
+#^ 4. Inheritance
 
 # inheritance is a process by which one class
 # can use attributes and methods of another class.

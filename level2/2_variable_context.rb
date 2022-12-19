@@ -1,4 +1,4 @@
-#^ Variable context
+#^ 2. Variable context
 
 # variables can exist in different contexts, we already know
 # about local and instance variables, but there are few more types

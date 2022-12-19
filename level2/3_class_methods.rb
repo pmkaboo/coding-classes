@@ -1,4 +1,4 @@
-#^ Class methods
+#^ 3. Class methods
 
 # just like we have instance and class variables, we also
 # have instance and class methods. the difference between
