@@ -58,7 +58,6 @@ arr.include?(2) # => true
 # or with no characters at all
 ['a', 'b', 'c'].join # => 'abc'
 
-
 #~ exercise:
 # -> create an empty array
 # -> repeatedly ask the user to provide random words or numbers and add them to the array
