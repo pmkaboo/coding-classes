@@ -8,7 +8,7 @@
 
 # `each` will run the given block of code for each element of an object
 
-[1,2,3].each &custom_block
+[1,2,3].each { |x| puts x }
 
 # the same thing, just with `do` - `end`
 [1,2,3].each do |x|

@@ -60,11 +60,14 @@ class Person
   end
 end
 
+jim = Person.new('john', '2000-1-1')
+jim.guess_age
+
 # from the outside, the public method `age`
 # has not changed in any way, its still called
-# the same, and still returns an integer
-# internally though we have changed calculation
-# of age to a random number.
+# the same, and still returns an integer,
+# internally though we have changed the calculation
+# of the age to just return a random number.
 
 # by default all methods are public, but we can
 # also explicitly say that methods are public
