@@ -21,8 +21,7 @@
 # items and the order, it should return an error
 # message.
 
-# For extra bonus points you can make sure the code is
-# following rubocop guidelines.
+# Extra bonus points for following rubocop guidelines.
 
 # In level2/restaurants/tests.rb you can find a test
 # suite and instructions on how to use it. To successfully

@@ -12,7 +12,11 @@
 require_relative 'your_file1.rb'
 require_relative 'your_file2.rb'
 
-# 3. change the error message(s) (optional)
+# 3. choose if youre going for bonus or not
+#      - this determines whether tests for discounts should run or not
+BONUS = false
+
+# 4. change the error message(s) (optional)
 #      - when placing an order and some items are unavailable
 #        or discount is added to both items and the order,
 #        a specific error message should be returned. You can either
@@ -20,14 +24,14 @@ require_relative 'your_file2.rb'
 UNAVAILABLE_ITEM_ERROR = 'Items not available'
 DOUBLE_DISCOUNT_ERROR = 'Double discount is not allowed'
 
-# 4. change the class name(s) (optional)
+# 5. change the class name(s) (optional)
 #      - if you dont want the classes representing the
 #        restaurants and items to be called Restaurant and
 #        Item, you can change that here
 RESTAURANT_CLASS = Restaurant
 ITEM_CLASS = Item
 
-# 5. run the tests
+# 6. run the tests
 #      - `ruby path/to/your_tests.rb`
 
 # ----- dont change anything below here -----
@@ -45,7 +49,7 @@ def test2
 
   restaurant.add_items(item)
 
-  result = restaurant.items.first.name == 'pizza'
+  result = restaurant.items&.first&.name == 'pizza'
   resolve(result, 'test2', 'failed addding one item to restaurant')
 end
 
@@ -54,9 +58,9 @@ def test3
   item1 = ITEM_CLASS.new('pizza', 10, 10)
   item2 = ITEM_CLASS.new('burger', 10, 10)
 
-  restaurant.add_items([item1, item2])
+  restaurant.add_items(item1, item2)
 
-  result = restaurant.items.map(&:name).sort == ['burger', 'pizza']
+  result = restaurant.items&.map(&:name)&.sort == ['burger', 'pizza']
   resolve(result, 'test3', 'failed addding multiple items to restaurant')
 end
 
@@ -67,7 +71,7 @@ def test4
   restaurant.add_items(item)
   restaurant.remove_item('pizza')
 
-  result = restaurant.items.empty?
+  result = restaurant.items&.empty?
   resolve(result, 'test4', 'failed removing item from restaurant')
 end
 
@@ -76,7 +80,7 @@ def test5
   item1 = ITEM_CLASS.new('pizza', 10, 10)
   item2 = ITEM_CLASS.new('burger', 7.5, 10)
 
-  restaurant.add_items([item1, item2])
+  restaurant.add_items(item1, item2)
 
   order_items = [
     { name: 'pizza', count: 1 },
@@ -127,7 +131,7 @@ def test8
 
   restaurant.place_order(order_items)
 
-  result = restaurant.items.first.stock == 3
+  result = restaurant.items&.first&.stock == 3
   resolve(result, 'test8', 'failed changing stock level after order')
 end
 
@@ -148,7 +152,7 @@ end
 def test10
   restaurant = RESTAURANT_CLASS.new('Owls place')
   item1 = ITEM_CLASS.new('pizza', 10, 10)
-  item1 = ITEM_CLASS.new('burger', 10, 10)
+  item2 = ITEM_CLASS.new('burger', 10, 10)
 
   restaurant.add_items(item1, item2)
 
@@ -207,7 +211,7 @@ end
 
 puts 'running tests'
 pass = [test1, test2, test3, test4, test5, test6, test7, test8].all?
-bonus = [pass, test9, test10, test11, test12].all?
+bonus = BONUS && [pass, test9, test10, test11, test12].all?
 
 puts
 

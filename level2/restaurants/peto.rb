@@ -1,7 +1,11 @@
 class MyRestaurant
-  def place_order(ok)
-    return 'not ok' unless ok
+  def initialize(*args, **kwargs); end
 
-    10
-  end
+  def method_missing(*args, **kwargs); end
+end
+
+class MenuItem
+  def initialize(*args, **kwargs); end
+
+  def method_missing(*args, **kwargs); end
 end
