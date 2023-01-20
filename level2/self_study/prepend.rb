@@ -1,4 +1,4 @@
-#^ prepend Module
+#^ Prepend module
 
 # aside of being included or extended, modules
 # can also be prepended. similarly to include,
