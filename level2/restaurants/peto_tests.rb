@@ -153,9 +153,9 @@ end
 def test11
   restaurant = RESTAURANT_CLASS.new('Owls place')
   item1 = ITEM_CLASS.new('pizza', 10, 10)
-  item1 = ITEM_CLASS.new('burger', 10, 10)
+  item2 = ITEM_CLASS.new('burger', 10, 10)
 
-  restaurant.add_items(item1)
+  restaurant.add_items(item1, item2)
 
   order_items = [
     { name: 'pizza', count: 1 },
