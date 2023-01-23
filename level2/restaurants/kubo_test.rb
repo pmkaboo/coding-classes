@@ -9,7 +9,7 @@
 #      - if you decide to have the files in a different
 #        directory, the filename needs to be replaced with
 #        a path from this files location to the required file
-require_relative 'restaurants.rb'
+require_relative 'kubo_restaurants'
 # require_relative 'your_file2.rb'
 
 # 3. choose if youre going for bonus or not

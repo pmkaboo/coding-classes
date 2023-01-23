@@ -50,4 +50,4 @@ class Item
   end
 end
 
-require_relative 'test'
+require_relative 'kubo_test'
