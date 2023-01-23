@@ -51,6 +51,8 @@
 # Is generally used for switching between different branches.
 
 # `git checkout origin/remote-branch-name`
+#   - will switch to remote branch, you won't be able to make any changes here
+# `git checkout -b origin/remote-branch-name`
 #   - creates a local copy of `remote-branch-name` and setup remote tracking
 #     for this branch
 # `git checkout -b new-branch-name`
