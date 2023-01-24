@@ -23,16 +23,12 @@ class Restaurant
       return DOUBLE_DISCOUNT_ERROR if order_item[:discount] && discount.positive?
 
       checked_item = @items.find { |i| i.name == order_item[:name] }
-      return UNAVAILABLE_ITEM_ERROR unless checked_item && stock_check(order_item, checked_item)
+      return UNAVAILABLE_ITEM_ERROR unless checked_item&.in_stock?(order_item[:count])
 
       checked_item.stock -= order_item[:count]
       order_price += checked_item.price * order_item[:count] * (1 - order_item[:discount].to_f)
     end
     order_price * (1 - discount.to_f)
-  end
-
-  def stock_check(order_item, checked_item)
-    checked_item.stock >= order_item[:count]
   end
 end
 
@@ -45,5 +41,9 @@ class Item
     @name = name
     @price = price
     @stock = stock
+  end
+
+  def in_stock?(count)
+    @stock.positive?
   end
 end
