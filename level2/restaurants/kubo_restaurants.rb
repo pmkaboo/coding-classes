@@ -10,27 +10,25 @@ class Restaurant
   end
 
   def add_items(*items)
-    items.each { |item| @items << item }
+    @items += items
   end
 
   def remove_item(item_name)
     @items.reject! { |item| item.name == item_name }
   end
 
-  def place_order(order_items, order_discount = 0)
-    order_discount = order_discount[:discount] if order_discount != 0
+  def place_order(order_items, discount: 0)
     order_price = 0
     order_items.each do |order_item|
-      checked_item = @items.select { |i| i.name == order_item[:name] }[0]
-      return DOUBLE_DISCOUNT_ERROR if order_item[:discount] && !order_discount.zero?
-      return UNAVAILABLE_ITEM_ERROR unless checked_item
-      return UNAVAILABLE_ITEM_ERROR unless stock_check(order_item, checked_item)
+      return DOUBLE_DISCOUNT_ERROR if order_item[:discount] && discount.positive?
+
+      checked_item = @items.find { |i| i.name == order_item[:name] }
+      return UNAVAILABLE_ITEM_ERROR unless checked_item && stock_check(order_item, checked_item)
 
       checked_item.stock -= order_item[:count]
-      order_price += checked_item.price * order_item[:count]
-      order_price -= order_price * order_item[:discount] if order_item[:discount]
+      order_price += checked_item.price * order_item[:count] * (1 - order_item[:discount].to_f)
     end
-    order_discount.zero? ? order_price : order_price -= order_price * order_discount
+    order_price * (1 - discount.to_f)
   end
 
   def stock_check(order_item, checked_item)
@@ -49,5 +47,3 @@ class Item
     @stock = stock
   end
 end
-
-require_relative 'kubo_test'
