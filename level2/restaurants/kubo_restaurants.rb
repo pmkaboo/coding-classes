@@ -44,6 +44,6 @@ class Item
   end
 
   def in_stock?(count)
-    @stock.positive?
+    count <= @stock
   end
 end
