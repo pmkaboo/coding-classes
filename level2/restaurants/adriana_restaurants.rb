@@ -10,8 +10,7 @@ class Restaurant
   end
 
   def add_items(*items)
-    @items << items
-    @items.flatten!
+    @items += items
   end
 
   def remove_item(item_name)
@@ -20,14 +19,12 @@ class Restaurant
 
   def place_order(ordered_items, discount: 0)
     return 'Double discount is not allowed' if invalid_discount?(ordered_items, discount)
+    return 'Items not available' if out_of_stock?(ordered_items)
 
     order_price = 0
     ordered_items.each do |ordered_item|
-      item = select_item(ordered_item[:name])
-
-      return 'Items not available' if item.nil? || !item.in_stock?
-
-      order_price += item.sell(ordered_item[:count], ordered_item[:discount])
+      item = select_item_by_name(ordered_item[:name])
+      order_price += item.sell(ordered_item)
     end
     order_price * (1 - discount)
   end
@@ -35,15 +32,23 @@ class Restaurant
   private
 
   def invalid_discount?(ordered_items, discount)
-    discount.positive? && ordered_items.map { |i| i[:discount].to_f }.sum.positive?
+    discount.positive? && ordered_items.sum { |i| i[:discount].to_f }.positive?
   end
 
-  def select_item(name)
-    items.select { |i| i.name == name }.first
+  def out_of_stock?(ordered_items)
+    check = ordered_items.map do |ordered_item|
+      item = select_item_by_name(ordered_item[:name])
+      item.nil? ? -1 : item.stock - ordered_item[:count]
+    end
+    check.any?(&:negative?)
+  end
+
+  def select_item_by_name(name)
+    items.find { |i| i.name == name }
   end
 end
 
-# class for Restaurants ordered in the Restaurants
+# class for Items ordered in the Restaurants
 class Item
   attr_reader :name, :price
   attr_accessor :stock
@@ -54,12 +59,8 @@ class Item
     @stock = stock
   end
 
-  def in_stock?
-    @stock.positive?
-  end
-
-  def sell(ordered_quantity, discount)
-    @stock -= ordered_quantity
-    @price * (1 - discount.to_f) * ordered_quantity
+  def sell(ordered_item)
+    @stock -= ordered_item[:count]
+    @price * (1 - ordered_item[:discount].to_f) * ordered_item[:count]
   end
 end
