@@ -82,12 +82,5 @@ class Item
     end
 end
 
-pizza = Item.new('pizza',10,10)
-burger = Item.new('burger', 10,10)
-egg = Item.new('egg',10,15)
-Sushitime = Restaurant.new('Sushitime', pizza, burger)
-
-
-puts Sushitime.place_order([{name: 'pizza', count: 1},{name: 'burger', count: 2}], discount: 0.5)
 
 
