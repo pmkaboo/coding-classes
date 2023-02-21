@@ -28,7 +28,7 @@ class Restaurant
       return UNAVAILABLE_ITEM_ERROR if item.nil? || item_out_of_stock?(item, ordered_item)
       return DOUBLE_DISCOUNT_ERROR if double_discount?(ordered_item, discount)
 
-      order_total += calculate_total(item, ordered_item)
+      order_total += item.calculate_total(ordered_item)
       items_in_stock << { item:, quantity: ordered_item[:count] }
     end
 
@@ -46,13 +46,6 @@ class Restaurant
 
   def double_discount?(ordered_item, discount)
     ordered_item[:discount] && discount > 0
-  end
-
-  def calculate_total(item, ordered_item)
-    price = item.price
-    quantity = ordered_item[:count]
-    item_discount = ordered_item[:discount] || 0
-    price * quantity * (1 - item_discount)
   end
 
   def deplete_stock(items_in_stock)
@@ -74,4 +67,11 @@ class Item
   def deplete_stock(quantity)
     @stock -= quantity
   end
+
+  def calculate_total(ordered_item)
+    quantity = ordered_item[:count]
+    item_discount = ordered_item[:discount] || 0
+    @price * quantity * (1 - item_discount)
+  end
+
 end
