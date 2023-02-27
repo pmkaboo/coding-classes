@@ -8,7 +8,7 @@
 # creating the file and writing the code for
 # the class.
 
-# Or we can use one of many generators# that
+# Or we can use one of many generators that
 # rails provides:
 # `rails generate controller ControllerName`
 # Kepp in mind that these generators usually also
