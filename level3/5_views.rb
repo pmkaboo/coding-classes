@@ -20,7 +20,9 @@
 # nesting -> which results in nice clean code.
 # HAML is not supported by default, so first we will need to open
 # 'Gemfile' and add this line to it:
+
 # `gem 'haml'`
+
 # and then we need to install it by running `bundle install`.
 # To use HAMl, we simply change the extension of the view files from
 # '.html.erb' to '.haml'.
