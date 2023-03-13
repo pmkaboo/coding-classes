@@ -11,20 +11,20 @@
 # located in `app/models`. Similarly to
 # controllers, we can either create them
 # manually, or with a rails generator:
-# `rails generate model ModelName`
+#$ `rails generate model ModelName`
 # Unlike controllers, model names are
 # by convention in singular - item, post, ...
 
 # Models represent tables in the database,
 # so when we're creating a new model, we
-# also need to create a new table. IF you've
+# also need to create a new table. If you've
 # used the `rails generate` command to create
 # the model, it also created a migration
 # file for you in `db/migrate`, if you've
 # created the model manually, you need to
 # create the migration aswell, for this it's
 # better to always use the generator:
-# `rails generate migration MigrationName`
+#$ `rails generate migration MigrationName`
 
 # If the `MigrationName` starts with the word
 # `Create`, it will be generated with code

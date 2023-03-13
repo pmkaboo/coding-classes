@@ -10,7 +10,7 @@
 
 # Or we can use one of many generators that
 # rails provides:
-# `rails generate controller ControllerName`
+#$ `rails generate controller ControllerName`
 # Kepp in mind that these generators usually also
 # create some extra stuff that we might not need.
 
@@ -20,6 +20,9 @@
 # inside a rails controller. Each controller
 # can have multiple actions - items#new, items#edit
 # items#destroy, ...
+
+# Instance variables created in controller actions
+# are available in views.
 
 #~ exercise:
 # -> create `Home` controller with `index` action

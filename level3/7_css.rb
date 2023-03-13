@@ -10,7 +10,7 @@
 # by applying a group of styles to a particular
 # element or a group of elements.
 
-# Stylesheets in rails are located in `app/stylesheets`,
+# Stylesheets in rails are located in `app/assets/stylesheets`,
 # if we wanted we could put all our css into the
 # `application.css` that was created with the rails
 # app, but this would get bloated very quickly, so
