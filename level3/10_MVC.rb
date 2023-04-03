@@ -23,7 +23,7 @@
 # and views, so let's put it all together.
 
 #~ exercise:
-# - create a page at /posts that will list all
+# - create a page at '/posts' that will list all
 #   posts currently in the db
 # - each post should be displayed as a card
 #   with title at the top and body below it
