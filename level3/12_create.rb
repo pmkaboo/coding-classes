@@ -50,7 +50,7 @@ end
 #~ exercise:
 # - add `new` and `create` actions to the posts controller
 # - update your routes if necessary
-# - the `create` action can have dummy values for the post
+# - the `create` action can have dummy values for title and body
 
 #* view
 
@@ -59,7 +59,7 @@ end
 # form that follows rails conventions:
 
 # app/views/items/new.haml
-.form= form_with(model: @item) do |form|
+= form_with(model: @item) do |form|
   .name
     = form.label :name
     = form.text_field :name
@@ -70,7 +70,7 @@ end
 
   .submit= form.submit
 
-#~ exercise
+#~ exercise:
 # - create the view for the `new` action in the
 #   posts controller
 # - the view should display a form for creating
@@ -91,7 +91,7 @@ end
 # in our app, because some malicious user could submit extra
 # values for fields which we didn't want to make editable
 # with this form.
-# To avoid this issue will use rails feature called `strong parameters`
+# To avoid this issue, we will use rails feature called `strong parameters`
 # which lets us filter the `params`:
 
 class ItemsController
@@ -110,3 +110,58 @@ end
 #~ exercise:
 # - update the values for the post in the `create` action
 #   with actual values using the strong parameters
+
+#* validations
+
+# Validations are another feature of rails, that helps
+# us dealing with invalid user input. They are rules
+# which are checked before a record is saved, and if any
+# of them fail, the save is cancelled - there won't be
+# any change in the database - and appropriate error
+# messages are added to the record. The error messages
+# are accessible through the `errors` attribute.
+
+# Validations are declared on the models:
+class Item < ApplicationRecord
+  validates :name, presence: true
+end
+
+# There are many different types of validations,
+# the one above checks if the field is not null,
+# and in case of strings also if the string contains
+# any other characters than just a white space.
+# In this same way we can validate uniqueness,
+# numericality, inclusion in some array, length,
+# and much more, for a full list see
+# https://guides.rubyonrails.org/active_record_validations.html
+
+#~ exercise:
+# - add validations to posts for presence of title and body,
+#   and length of body so it's at least 15 characters
+
+#* errors
+
+# When validations fail, they will populate the `errors`
+# attribute of the record with failure messages, which
+# we can use to inform the user about the problems.
+# We can do this by updating our form:
+
+# app/views/items/new.haml
+= form_with(model: @item) do |form|
+  .name
+    = form.label :name
+    = form.text_field :name
+    - @item.errors.full_messages_for(:name).each do |message|
+      .error= message
+
+  .price
+    = form.label :price
+    = form.number_field :price
+    - @item.errors.full_messages_for(:price).each do |message|
+      .error= message
+
+  .submit= form.submit
+
+#~ exercise:
+# - display errors for post title in body in the form
+# - on index page add a link to new post form

@@ -104,7 +104,7 @@
 # call the appropriate path helper to convert the record
 # into a path:
 
-#$ link_to item.name, name
+#$ link_to item.name, item
 
 #~ exercise:
 # - in posts index view, add a link to each individual post
